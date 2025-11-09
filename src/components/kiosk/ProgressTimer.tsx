@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
 interface ProgressTimerProps {
@@ -19,21 +19,36 @@ export default function ProgressTimer({
   className,
 }: ProgressTimerProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
+  const [progress, setProgress] = useState(0);
+  const startTimeRef = useRef<number>(Date.now());
+  const requestRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
-    if (timeLeft <= 0) {
-      onComplete();
-      return;
-    }
+    startTimeRef.current = Date.now();
 
-    const timer = setTimeout(() => {
-      setTimeLeft(timeLeft - 1);
-    }, 1000);
+    const animate = () => {
+      const elapsed = (Date.now() - startTimeRef.current) / 1000;
+      const remaining = Math.max(0, duration - elapsed);
+      const currentProgress = Math.min(100, (elapsed / duration) * 100);
 
-    return () => clearTimeout(timer);
-  }, [timeLeft, onComplete]);
+      setTimeLeft(Math.ceil(remaining));
+      setProgress(currentProgress);
 
-  const progress = ((duration - timeLeft) / duration) * 100;
+      if (elapsed >= duration) {
+        onComplete();
+      } else {
+        requestRef.current = requestAnimationFrame(animate);
+      }
+    };
+
+    requestRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+    };
+  }, [duration, onComplete]);
 
   return (
     <div className={cn('w-full max-w-[400px]', className)}>
@@ -42,7 +57,7 @@ export default function ProgressTimer({
       </p>
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div
-          className="h-2 rounded-full transition-all duration-1000"
+          className="h-2 rounded-full"
           style={{ width: `${progress}%`, backgroundColor: color }}
         />
       </div>

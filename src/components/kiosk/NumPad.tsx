@@ -44,7 +44,7 @@ export default function NumPad({
           {/* 지우기 버튼 */}
           <button
             onClick={onDelete}
-            className="h-[70px] bg-[#ffebee] hover:bg-[#ffcdd2] flex items-center justify-center transition-colors border-r border-gray-200"
+            className="h-[70px] bg-[#ffebee] hover:bg-[#ffcdd2] flex items-center justify-center transition-colors border-r border-t border-gray-200"
           >
             <Delete className="w-6 h-6 text-[#d32f2f]" />
           </button>
@@ -52,7 +52,7 @@ export default function NumPad({
           {/* 0 버튼 */}
           <button
             onClick={() => onNumberClick(0)}
-            className="h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors border-r border-gray-200"
+            className="h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors border-r border-t border-gray-200"
           >
             0
           </button>
@@ -61,7 +61,7 @@ export default function NumPad({
           <button
             onClick={onSubmit}
             disabled={submitDisabled}
-            className="h-[70px] bg-[#e3f2fd] hover:bg-[#bbdefb] text-[18px] font-semibold text-[#1976d2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="h-[70px] bg-[#e3f2fd] text-[18px] font-semibold text-[#1976d2] transition-colors border-t border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-[#bbdefb]"
           >
             확인
           </button>

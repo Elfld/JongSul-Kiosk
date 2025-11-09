@@ -18,20 +18,21 @@ export default function PinInput({
       {Array.from({ length }).map((_, index) => {
         const isActive = index === pinCode.length && pinCode.length < 6;
         const isFilled = index < pinCode.length;
+        const digit = pinCode[index] || '';
 
         return (
           <div
             key={index}
             className={cn(
-              'w-[60px] h-[70px] rounded-[12px] flex items-center justify-center transition-all',
+              'w-[60px] h-[70px] rounded-[12px] flex items-center justify-center text-[24px] font-semibold transition-all',
               isActive
-                ? 'bg-white border-[3px] border-[#1976d2]'
+                ? 'bg-white border-[3px] border-[#1976d2] text-[#1976d2]'
                 : isFilled
-                ? 'bg-white border-2 border-gray-300'
-                : 'bg-white border-2 border-gray-300'
+                ? 'bg-white border-2 border-gray-300 text-[#2c3e50]'
+                : 'bg-white border-2 border-gray-300 text-transparent'
             )}
           >
-            {/* 빈 상태 - 아무것도 표시 안함 */}
+            {digit}
           </div>
         );
       })}
