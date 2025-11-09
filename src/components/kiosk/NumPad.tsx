@@ -18,49 +18,55 @@ export default function NumPad({
   submitDisabled = false,
   className,
 }: NumPadProps) {
-  const buttons = [
-    1, 2, 3,
-    4, 5, 6,
-    7, 8, 9,
-  ];
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
-    <div className={cn('grid grid-cols-3 gap-1 max-w-[600px]', className)}>
-      {/* 숫자 버튼 1-9 */}
-      {buttons.map((num) => (
-        <button
-          key={num}
-          onClick={() => onNumberClick(num)}
-          className="h-20 bg-white hover:bg-gray-50 text-[30px] font-semibold text-[#2c3e50] transition-colors border border-gray-200"
-        >
-          {num}
-        </button>
-      ))}
+    <div className={cn('w-full max-w-[520px] mx-auto', className)}>
+      <div className="rounded-[20px] overflow-hidden border-2 border-gray-200 bg-white">
+        <div className="grid grid-cols-3">
+          {/* 숫자 버튼 1-9 */}
+          {numbers.map((num, index) => (
+            <button
+              key={num}
+              onClick={() => onNumberClick(num)}
+              className={cn(
+                'h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors',
+                // 오른쪽 테두리: 3의 배수가 아닌 경우에만
+                index % 3 !== 2 && 'border-r border-gray-200',
+                // 아래 테두리: 마지막 줄(7,8,9)이 아닌 경우에만
+                index < 6 && 'border-b border-gray-200'
+              )}
+            >
+              {num}
+            </button>
+          ))}
 
-      {/* 지우기 버튼 */}
-      <button
-        onClick={onDelete}
-        className="h-20 bg-[#ffebee] hover:bg-[#ffcdd2] flex items-center justify-center transition-colors border border-gray-200"
-      >
-        <Delete className="w-7 h-7 text-[#d32f2f]" />
-      </button>
+          {/* 지우기 버튼 */}
+          <button
+            onClick={onDelete}
+            className="h-[70px] bg-[#ffebee] hover:bg-[#ffcdd2] flex items-center justify-center transition-colors border-r border-gray-200"
+          >
+            <Delete className="w-6 h-6 text-[#d32f2f]" />
+          </button>
 
-      {/* 0 버튼 */}
-      <button
-        onClick={() => onNumberClick(0)}
-        className="h-20 bg-white hover:bg-gray-50 text-[30px] font-semibold text-[#2c3e50] transition-colors border border-gray-200"
-      >
-        0
-      </button>
+          {/* 0 버튼 */}
+          <button
+            onClick={() => onNumberClick(0)}
+            className="h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors border-r border-gray-200"
+          >
+            0
+          </button>
 
-      {/* 확인 버튼 */}
-      <button
-        onClick={onSubmit}
-        disabled={submitDisabled}
-        className="h-20 bg-[#e3f2fd] hover:bg-[#bbdefb] text-[20px] font-bold text-[#1976d2] transition-colors border border-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        확인
-      </button>
+          {/* 확인 버튼 */}
+          <button
+            onClick={onSubmit}
+            disabled={submitDisabled}
+            className="h-[70px] bg-[#e3f2fd] hover:bg-[#bbdefb] text-[18px] font-semibold text-[#1976d2] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            확인
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -14,21 +14,24 @@ export default function PinInput({
   className,
 }: PinInputProps) {
   return (
-    <div className={cn('flex justify-center gap-3 my-8', className)}>
+    <div className={cn('flex justify-center gap-4 my-6', className)}>
       {Array.from({ length }).map((_, index) => {
-        const hasValue = index < pinCode.length;
+        const isActive = index === pinCode.length && pinCode.length < 6;
+        const isFilled = index < pinCode.length;
 
         return (
           <div
             key={index}
             className={cn(
-              'w-16 h-20 rounded-[16px] flex items-center justify-center text-[30px] font-bold transition-all',
-              hasValue
-                ? 'bg-[#e3f2fd] border-2 border-[#1976d2] text-[#1976d2]'
-                : 'bg-white border-2 border-gray-300 text-gray-300'
+              'w-[60px] h-[70px] rounded-[12px] flex items-center justify-center transition-all',
+              isActive
+                ? 'bg-white border-[3px] border-[#1976d2]'
+                : isFilled
+                ? 'bg-white border-2 border-gray-300'
+                : 'bg-white border-2 border-gray-300'
             )}
           >
-            {hasValue ? '●' : '·'}
+            {/* 빈 상태 - 아무것도 표시 안함 */}
           </div>
         );
       })}
