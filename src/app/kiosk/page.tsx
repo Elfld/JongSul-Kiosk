@@ -25,7 +25,7 @@ export default function KioskMainPage() {
         </p>
 
         {/* 버튼 영역 */}
-        <div className="w-full max-w-[400px] flex flex-col gap-8 mt-8">
+        <div className="w-full max-w-[320px] flex flex-col gap-12 mt-8">
           <KioskButton
             variant="primary"
             size="large"
@@ -36,7 +36,7 @@ export default function KioskMainPage() {
           </KioskButton>
 
           <KioskButton
-            variant="secondary"
+            variant="below"
             size="large"
             fullWidth
             onClick={() => router.push('/kiosk/retrieve')}

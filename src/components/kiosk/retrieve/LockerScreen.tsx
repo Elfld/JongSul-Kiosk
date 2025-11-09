@@ -17,7 +17,7 @@ export default function LockerScreen({ lockerNumber, onComplete }: LockerScreenP
           사물함 {lockerNumber}번이 열렸습니다
         </h1>
 
-        <p className="text-[16px] text-[#6c757d] text-center leading-relaxed">
+        <p className="text-[22px] text-[#6c757d] text-center leading-relaxed">
           분실물을 수령하신 후
           <br />
           문을 닫아주세요

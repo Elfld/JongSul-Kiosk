@@ -16,7 +16,7 @@ export default function CompleteScreen({ onTimeout }: CompleteScreenProps) {
           <h1 className="text-[28px] font-bold text-[#2c3e50] mb-2">
             이용해 주셔서 감사합니다
           </h1>
-          <p className="text-[16px] text-[#6c757d]">
+          <p className="text-[24px] text-[#6c757d]">
             잠시 후 처음 화면으로
             <br />
             돌아갑니다

@@ -52,9 +52,9 @@ export default function ProgressTimer({
 
   return (
     <div className={cn('w-full max-w-[400px]', className)}>
-      <p className="text-[14px] text-[#6c757d] text-center mb-2">
+      {/* <p className="text-[14px] text-[#6c757d] text-center mb-2">
         {timeLeft}{message}
-      </p>
+      </p> */}
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div
           className="h-2 rounded-full"

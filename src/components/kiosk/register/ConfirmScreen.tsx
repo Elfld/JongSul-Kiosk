@@ -13,7 +13,7 @@ interface ConfirmScreenProps {
 export default function ConfirmScreen({ itemData, onConfirm, onRetry }: ConfirmScreenProps) {
   return (
     <KioskLayout>
-      <div className="flex flex-col items-center gap-8 max-w-[600px] mx-auto">
+      <div className="flex flex-col items-center gap-8 max-w-[420px] mx-auto">
         <h1 className="text-[48px] font-bold text-[#2c3e50] text-center">
           등록 정보 확인
         </h1>
@@ -32,7 +32,7 @@ export default function ConfirmScreen({ itemData, onConfirm, onRetry }: ConfirmS
           <div className="flex gap-3">
             {itemData.tags.map((tag) => (
               <span key={tag} className="px-4 py-2 bg-[#e3f2fd] text-[#1976d2] rounded-full text-[18px] font-medium">
-                #{tag}
+                {tag}
               </span>
             ))}
           </div>
@@ -49,7 +49,7 @@ export default function ConfirmScreen({ itemData, onConfirm, onRetry }: ConfirmS
         </div>
 
         {/* 버튼 영역 */}
-        <div className="flex flex-col gap-4 w-full max-w-[400px] mx-auto">
+        <div className="flex flex-col gap-8 mt-8 w-full max-w-[320px] mx-auto">
           <KioskButton variant="primary" fullWidth onClick={onConfirm}>
             네, 맞아요
           </KioskButton>

@@ -61,7 +61,7 @@ export default function NumPad({
           <button
             onClick={onSubmit}
             disabled={submitDisabled}
-            className="h-[70px] bg-[#e3f2fd] text-[18px] font-semibold text-[#1976d2] transition-colors border-t border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-[#bbdefb]"
+            className="h-[70px] bg-[#e3f2fd] text-[18px] font-semibold text-[#1976d2] transition-colors border-t border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 hover:enabled:bg-[#bbdefb]"
           >
             확인
           </button>
