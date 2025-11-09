@@ -1,9 +1,11 @@
 'use client';
 
-import KioskLayout from '@/components/kiosk/KioskLayout';
-import KioskButton from '@/components/kiosk/KioskButton';
+import { useRouter } from 'next/navigation';
+import { KioskLayout, KioskButton } from '@/components/kiosk';
 
-export default function KioskPage() {
+export default function KioskMainPage() {
+  const router = useRouter();
+
   return (
     <KioskLayout>
       <div className="flex flex-col items-center gap-12">
@@ -23,11 +25,21 @@ export default function KioskPage() {
 
         {/* 버튼 영역 */}
         <div className="w-full max-w-[400px] flex flex-col gap-8 mt-8">
-          <KioskButton variant="primary" fullWidth>
+          <KioskButton
+            variant="primary"
+            size="large"
+            fullWidth
+            onClick={() => router.push('/kiosk/register')}
+          >
             분실물 등록
           </KioskButton>
 
-          <KioskButton variant="secondary" fullWidth>
+          <KioskButton
+            variant="secondary"
+            size="large"
+            fullWidth
+            onClick={() => router.push('/kiosk/retrieve')}
+          >
             분실물 찾기
           </KioskButton>
         </div>
