@@ -7,6 +7,7 @@ interface ProgressTimerProps {
   duration?: number;
   onComplete: () => void;
   message?: string;
+  color?: string;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export default function ProgressTimer({
   duration = 5,
   onComplete,
   message = '초 후 처음 화면으로 돌아갑니다',
+  color = '#4caf50',
   className,
 }: ProgressTimerProps) {
   const [timeLeft, setTimeLeft] = useState(duration);
@@ -35,13 +37,13 @@ export default function ProgressTimer({
 
   return (
     <div className={cn('w-full max-w-[400px]', className)}>
-      <p className="text-sm text-gray-500 text-center mb-2">
+      <p className="text-[14px] text-[#6c757d] text-center mb-2">
         {timeLeft}{message}
       </p>
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div
-          className="bg-sky-500 h-2 rounded-full transition-all duration-1000"
-          style={{ width: `${progress}%` }}
+          className="h-2 rounded-full transition-all duration-1000"
+          style={{ width: `${progress}%`, backgroundColor: color }}
         />
       </div>
     </div>

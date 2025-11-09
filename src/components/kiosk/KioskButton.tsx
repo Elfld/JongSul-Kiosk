@@ -22,16 +22,16 @@ export default function KioskButton({
   className,
 }: KioskButtonProps) {
   const variants = {
-    primary: 'bg-sky-500 text-white hover:bg-sky-600',
-    secondary: 'bg-white border-2 border-gray-300 text-gray-700 hover:bg-gray-50',
-    warning: 'bg-orange-500 text-white hover:bg-orange-600',
-    success: 'bg-green-500 text-white hover:bg-green-600',
+    primary: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
+    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d] hover:bg-gray-50',
+    warning: 'bg-[#ff9800] text-white hover:bg-[#f57c00]',
+    success: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
   };
 
   const sizes = {
-    large: 'py-6 text-2xl',
-    medium: 'py-5 text-2xl',
-    small: 'py-4 text-xl',
+    large: 'py-6 text-[24px]',
+    medium: 'py-5 text-[24px]',
+    small: 'py-4 text-[20px]',
   };
 
   return (

@@ -11,7 +11,7 @@ interface StatusIconProps {
 export default function StatusIcon({ type, className }: StatusIconProps) {
   const configs = {
     success: {
-      bg: 'bg-sky-500',
+      bg: 'bg-[#4caf50]',
       Icon: Check,
     },
     error: {
@@ -19,15 +19,15 @@ export default function StatusIcon({ type, className }: StatusIconProps) {
       Icon: AlertCircle,
     },
     warning: {
-      bg: 'bg-orange-500',
+      bg: 'bg-[#ff9800]',
       Icon: AlertCircle,
     },
     unlock: {
-      bg: 'bg-green-500',
+      bg: 'bg-[#4caf50]',
       Icon: LockOpen,
     },
     party: {
-      bg: 'bg-sky-500',
+      bg: 'bg-[#1976d2]',
       Icon: PartyPopper,
     },
   };

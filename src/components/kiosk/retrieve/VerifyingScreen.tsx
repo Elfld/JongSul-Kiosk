@@ -7,13 +7,15 @@ export default function VerifyingScreen() {
   return (
     <KioskLayout>
       <div className="flex flex-col items-center gap-8">
-        <h1 className="text-6xl font-bold text-gray-800">
+        <h1 className="text-[60px] font-bold text-[#2c3e50]">
           코드 확인 중
         </h1>
-        <p className="text-3xl text-gray-600">
+        <p className="text-[30px] text-[#6c757d]">
           잠시만 기다려주세요...
         </p>
-        <LoadingSpinner />
+        <div className="mt-8">
+          <LoadingSpinner />
+        </div>
       </div>
     </KioskLayout>
   );

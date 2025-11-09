@@ -11,15 +11,16 @@ export default function KioskMainPage() {
       <div className="flex flex-col items-center gap-12">
         {/* 타이틀 */}
         <div className="text-center">
-          <h1 className="text-7xl font-bold text-gray-800 leading-tight">
+          <h1 className="text-[72px] font-bold text-[#2c3e50] leading-tight">
             인하대 분실물
-            <br />
+          </h1>
+          <h1 className="text-[72px] font-bold text-[#2c3e50] leading-tight">
             키오스크
           </h1>
         </div>
 
         {/* 부제 */}
-        <p className="text-4xl text-gray-500 font-medium">
+        <p className="text-[36px] text-[#6c757d] font-medium">
           24시간 분실물 센터
         </p>
 

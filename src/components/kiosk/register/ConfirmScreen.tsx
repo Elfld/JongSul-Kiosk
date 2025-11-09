@@ -14,36 +14,36 @@ export default function ConfirmScreen({ itemData, onConfirm, onRetry }: ConfirmS
   return (
     <KioskLayout centered={false}>
       <div className="flex flex-col gap-8">
-        <h1 className="text-5xl font-bold text-gray-800">
+        <h1 className="text-[48px] font-bold text-[#2c3e50]">
           등록 정보 확인
         </h1>
-        <p className="text-2xl text-gray-600">
+        <p className="text-[24px] text-[#6c757d]">
           인식된 정보가 맞는지 확인해주세요
         </p>
 
         {/* 카드 영역 */}
-        <div className="bg-white rounded-3xl p-8 flex flex-col items-center gap-6 shadow-lg">
+        <div className="bg-white rounded-[24px] p-8 flex flex-col items-center gap-6 shadow-lg">
           {/* 사진 */}
-          <div className="w-[200px] h-[200px] bg-gray-100 rounded-2xl overflow-hidden flex items-center justify-center">
+          <div className="w-[200px] h-[200px] bg-gray-100 rounded-[16px] overflow-hidden flex items-center justify-center">
             <Smartphone className="w-16 h-16 text-gray-400" />
           </div>
 
           {/* 태그 */}
           <div className="flex gap-3">
             {itemData.tags.map((tag) => (
-              <span key={tag} className="px-4 py-2 bg-sky-100 text-sky-700 rounded-full text-lg font-medium">
+              <span key={tag} className="px-4 py-2 bg-[#e3f2fd] text-[#1976d2] rounded-full text-[18px] font-medium">
                 #{tag}
               </span>
             ))}
           </div>
 
           {/* 날짜 */}
-          <p className="text-lg text-gray-600">
+          <p className="text-[18px] text-[#6c757d]">
             {itemData.foundDate}
           </p>
 
           {/* 위치 */}
-          <p className="text-xl text-gray-700 font-medium">
+          <p className="text-[20px] text-[#2c3e50] font-medium">
             📍 {itemData.location}
           </p>
         </div>
