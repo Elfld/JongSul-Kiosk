@@ -1,0 +1,29 @@
+'use client';
+
+import { cn } from '@/lib/utils';
+
+interface KioskLayoutProps {
+  children: React.ReactNode;
+  centered?: boolean;
+  className?: string;
+}
+
+export default function KioskLayout({
+  children,
+  centered = true,
+  className,
+}: KioskLayoutProps) {
+  return (
+    <div
+      className={cn(
+        'min-h-screen bg-gray-50',
+        centered && 'flex items-center justify-center',
+        className
+      )}
+    >
+      <div className="w-full max-w-[768px] px-8 py-12">
+        {children}
+      </div>
+    </div>
+  );
+}
