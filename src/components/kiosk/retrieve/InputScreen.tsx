@@ -38,6 +38,7 @@ export default function InputScreen({ pinCode, onPinChange, onSubmit, onBack }: 
           }}
           onSubmit={onSubmit}
           submitDisabled={pinCode.length !== 6}
+          className="mx-auto"
         />
 
         <KioskButton

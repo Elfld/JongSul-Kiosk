@@ -4,18 +4,18 @@ import { Delete } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NumPadProps {
-  onNumberPress: (num: number) => void;
+  onNumberClick: (num: number) => void;
   onDelete: () => void;
-  onConfirm: () => void;
-  disabled?: boolean;
+  onSubmit: () => void;
+  submitDisabled?: boolean;
   className?: string;
 }
 
 export default function NumPad({
-  onNumberPress,
+  onNumberClick,
   onDelete,
-  onConfirm,
-  disabled = false,
+  onSubmit,
+  submitDisabled = false,
   className,
 }: NumPadProps) {
   const buttons = [
@@ -30,9 +30,8 @@ export default function NumPad({
       {buttons.map((num) => (
         <button
           key={num}
-          onClick={() => onNumberPress(num)}
-          disabled={disabled}
-          className="h-20 bg-white hover:bg-gray-50 text-3xl font-semibold text-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={() => onNumberClick(num)}
+          className="h-20 bg-white hover:bg-gray-50 text-3xl font-semibold text-gray-800 transition-colors"
         >
           {num}
         </button>
@@ -41,26 +40,24 @@ export default function NumPad({
       {/* 지우기 버튼 */}
       <button
         onClick={onDelete}
-        disabled={disabled}
-        className="h-20 bg-red-50 hover:bg-red-100 flex items-center justify-center transition-colors disabled:opacity-50"
+        className="h-20 bg-red-50 hover:bg-red-100 flex items-center justify-center transition-colors"
       >
         <Delete className="w-7 h-7 text-red-500" />
       </button>
 
       {/* 0 버튼 */}
       <button
-        onClick={() => onNumberPress(0)}
-        disabled={disabled}
-        className="h-20 bg-white hover:bg-gray-50 text-3xl font-semibold text-gray-800 transition-colors disabled:opacity-50"
+        onClick={() => onNumberClick(0)}
+        className="h-20 bg-white hover:bg-gray-50 text-3xl font-semibold text-gray-800 transition-colors"
       >
         0
       </button>
 
       {/* 확인 버튼 */}
       <button
-        onClick={onConfirm}
-        disabled={disabled}
-        className="h-20 bg-sky-50 hover:bg-sky-100 text-xl font-bold text-sky-600 transition-colors disabled:opacity-50"
+        onClick={onSubmit}
+        disabled={submitDisabled}
+        className="h-20 bg-sky-50 hover:bg-sky-100 text-xl font-bold text-sky-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         확인
       </button>

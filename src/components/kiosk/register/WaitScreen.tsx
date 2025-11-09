@@ -21,10 +21,10 @@ export default function WaitScreen({ onStart, onBack }: WaitScreenProps) {
         <div className="w-[400px] h-[250px] border-4 border-dashed border-gray-300 rounded-3xl bg-white flex items-center justify-center">
           <Package className="w-24 h-24 text-gray-300" />
         </div>
-        <KioskButton variant="primary" onClick={onStart}>
+        <KioskButton variant="primary" onClick={onStart} className="w-[250px]">
           시작하기
         </KioskButton>
-        <KioskButton variant="secondary" onClick={onBack}>
+        <KioskButton variant="secondary" onClick={onBack} className="w-[250px]">
           처음 화면으로
         </KioskButton>
       </div>

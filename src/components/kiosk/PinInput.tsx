@@ -4,22 +4,20 @@ import { cn } from '@/lib/utils';
 
 interface PinInputProps {
   length?: number;
-  value: string;
-  onChange?: (value: string) => void;
+  pinCode: string;
   className?: string;
 }
 
 export default function PinInput({
   length = 6,
-  value,
-  onChange,
+  pinCode,
   className,
 }: PinInputProps) {
   return (
-    <div className={cn('flex justify-center gap-3', className)}>
+    <div className={cn('flex justify-center gap-3 my-8', className)}>
       {Array.from({ length }).map((_, index) => {
-        const hasValue = index < value.length;
-        const digit = value[index] || '';
+        const hasValue = index < pinCode.length;
+        const digit = pinCode[index] || '';
 
         return (
           <div

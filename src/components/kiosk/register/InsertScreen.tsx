@@ -23,10 +23,10 @@ export default function InsertScreen({ onComplete, onBack }: InsertScreenProps) 
         <div className="w-[400px] h-[250px] border-4 border-sky-500 rounded-3xl bg-white flex items-center justify-center">
           <PackageOpen className="w-20 h-20 text-sky-500" />
         </div>
-        <KioskButton variant="primary" onClick={onComplete}>
+        <KioskButton variant="primary" onClick={onComplete} className="w-[250px]">
           투입 완료
         </KioskButton>
-        <KioskButton variant="secondary" onClick={onBack}>
+        <KioskButton variant="secondary" onClick={onBack} className="w-[250px]">
           처음 화면으로
         </KioskButton>
       </div>
