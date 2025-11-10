@@ -9,6 +9,7 @@ interface KioskButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   fullWidth?: boolean;
+  compact?: boolean;
   className?: string;
 }
 
@@ -19,6 +20,7 @@ export default function KioskButton({
   onClick,
   disabled = false,
   fullWidth = false,
+  compact = false,
   className,
 }: KioskButtonProps) {
   const variants = {
@@ -36,6 +38,12 @@ export default function KioskButton({
     small: 'py-4 text-[20px]',
   };
 
+  const getWidthClass = () => {
+    if (compact) return 'w-[300px]';
+    if (fullWidth) return 'w-full';
+    return 'w-auto px-12';
+  };
+
   return (
     <button
       onClick={onClick}
@@ -44,7 +52,7 @@ export default function KioskButton({
         'rounded-full font-bold transition-colors',
         variants[variant],
         sizes[size],
-        fullWidth ? 'w-full' : 'w-auto px-12',
+        getWidthClass(),
         disabled && 'opacity-50 cursor-not-allowed',
         className
       )}

@@ -23,7 +23,7 @@ export default function LockerScreen({ lockerNumber, onComplete }: LockerScreenP
           문을 닫아주세요
         </p>
 
-        <KioskButton variant="success" size="medium" onClick={onComplete} className="w-full mt-2">
+        <KioskButton variant="success" size="medium" compact onClick={onComplete} className="mt-2">
           수령 완료
         </KioskButton>
       </Card>
