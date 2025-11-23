@@ -24,12 +24,12 @@ export default function KioskButton({
   className,
 }: KioskButtonProps) {
   const variants = {
-    primary: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
-    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d] hover:bg-gray-50',
-    below: 'bg-[#59969d] text-white hover:bg-[#4a7c82]',
-    warning: 'bg-[#ff9800] text-white hover:bg-[#f57c00]',
-    success: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
-    dark: 'bg-[#475569] text-white hover:bg-[#334155]',
+    primary: 'bg-[#4caf50] text-white hover:bg-[#45a049] active:bg-[#3d8b40]',
+    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d] hover:bg-gray-50 active:bg-gray-100',
+    below: 'bg-[#59969d] text-white hover:bg-[#4a7c82] active:bg-[#3d6a6f]',
+    warning: 'bg-[#ff9800] text-white hover:bg-[#f57c00] active:bg-[#e65100]',
+    success: 'bg-[#4caf50] text-white hover:bg-[#45a049] active:bg-[#3d8b40]',
+    dark: 'bg-[#475569] text-white hover:bg-[#334155] active:bg-[#1e293b]',
   };
 
   const sizes = {
@@ -44,16 +44,23 @@ export default function KioskButton({
     return 'w-auto px-[clamp(32px,6vmin,48px)]';
   };
 
+  const handleClick = () => {
+    if (disabled || !onClick) return;
+    setTimeout(() => {
+      onClick();
+    }, 80);
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       className={cn(
-        'rounded-full font-bold transition-colors',
+        'rounded-full font-bold transition-all duration-100 active:scale-[0.96]',
         variants[variant],
         sizes[size],
         getWidthClass(),
-        disabled && 'opacity-50 cursor-not-allowed',
+        disabled && 'opacity-50 cursor-not-allowed active:scale-100',
         className
       )}
     >
