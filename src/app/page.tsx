@@ -30,7 +30,7 @@ export default function KioskMainPage() {
             variant="primary"
             size="large"
             fullWidth
-            onClick={() => router.push('/kiosk/register')}
+            onClick={() => router.push('/register')}
           >
             분실물 등록
           </KioskButton>
@@ -39,7 +39,7 @@ export default function KioskMainPage() {
             variant="below"
             size="large"
             fullWidth
-            onClick={() => router.push('/kiosk/retrieve')}
+            onClick={() => router.push('/retrieve')}
           >
             분실물 찾기
           </KioskButton>

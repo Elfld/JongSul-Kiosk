@@ -48,7 +48,7 @@ export default function RetrievePage() {
 
   const handleLockerComplete = () => setStep('complete');
 
-  const handleBackToHome = () => router.push('/kiosk');
+  const handleBackToHome = () => router.push('/');
 
   // step에 따라 화면 렌더링
   switch (step) {
