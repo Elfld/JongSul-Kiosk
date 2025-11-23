@@ -25,7 +25,7 @@ export default function KioskMainPage() {
         </p>
 
         {/* 버튼 영역 */}
-        <div className="w-full max-w-[320px] flex flex-col gap-[2vmin] mt-[2vmin]">
+        <div className="w-full max-w-[clamp(240px,45vmin,360px)] flex flex-col gap-[2vmin] mt-[2vmin]">
           <KioskButton
             variant="primary"
             size="large"

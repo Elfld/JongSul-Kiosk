@@ -22,7 +22,7 @@ export default function ConfirmScreen({ itemData, onConfirm, onRetry }: ConfirmS
         </p>
 
         {/* 카드 영역 */}
-        <div className="bg-white rounded-[20px] p-[2.5vmin] flex flex-col items-center gap-[1.5vmin] shadow-lg w-full">
+        <div className="bg-white rounded-[clamp(16px,2.5vmin,24px)] p-[clamp(24px,4.5vmin,40px)] flex flex-col items-center gap-[2vmin] shadow-lg w-full">
           {/* 사진 */}
           <div className="w-[clamp(100px,18vmin,200px)] h-[clamp(100px,18vmin,200px)] bg-gray-100 rounded-[12px] overflow-hidden flex items-center justify-center">
             <Smartphone className="w-[clamp(32px,6vmin,64px)] h-[clamp(32px,6vmin,64px)] text-gray-400" />
