@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface KioskButtonProps {
@@ -23,13 +24,26 @@ export default function KioskButton({
   compact = false,
   className,
 }: KioskButtonProps) {
-  const variants = {
-    primary: 'bg-[#4caf50] text-white hover:bg-[#45a049] active:bg-[#3d8b40]',
-    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d] hover:bg-gray-50 active:bg-gray-100',
-    below: 'bg-[#59969d] text-white hover:bg-[#4a7c82] active:bg-[#3d6a6f]',
-    warning: 'bg-[#ff9800] text-white hover:bg-[#f57c00] active:bg-[#e65100]',
-    success: 'bg-[#4caf50] text-white hover:bg-[#45a049] active:bg-[#3d8b40]',
-    dark: 'bg-[#475569] text-white hover:bg-[#334155] active:bg-[#1e293b]',
+  const [pressed, setPressed] = useState(false);
+
+  // 기본 상태 색상
+  const baseColors = {
+    primary: 'bg-[#4caf50] text-white',
+    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d]',
+    below: 'bg-[#59969d] text-white',
+    warning: 'bg-[#ff9800] text-white',
+    success: 'bg-[#4caf50] text-white',
+    dark: 'bg-[#475569] text-white',
+  };
+
+  // 눌림 상태 색상
+  const pressedColors = {
+    primary: 'bg-[#3d8b40] text-white',
+    secondary: 'bg-gray-100 border-2 border-gray-300 text-[#6c757d]',
+    below: 'bg-[#3d6a6f] text-white',
+    warning: 'bg-[#e65100] text-white',
+    success: 'bg-[#3d8b40] text-white',
+    dark: 'bg-[#1e293b] text-white',
   };
 
   const sizes = {
@@ -44,23 +58,38 @@ export default function KioskButton({
     return 'w-auto px-[clamp(32px,6vmin,48px)]';
   };
 
-  const handleClick = () => {
-    if (disabled || !onClick) return;
+  const handlePointerDown = () => {
+    if (disabled) return;
+    setPressed(true);
+  };
+
+  const handlePointerUp = () => {
+    if (disabled) return;
+    setPressed(false);
+    // 떼짐 효과가 보인 후 onClick 실행
     setTimeout(() => {
-      onClick();
+      onClick?.();
     }, 80);
+  };
+
+  const handlePointerLeave = () => {
+    setPressed(false);
   };
 
   return (
     <button
-      onClick={handleClick}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerLeave}
+      onPointerCancel={handlePointerLeave}
       disabled={disabled}
       className={cn(
-        'rounded-full font-bold transition-all duration-100 active:scale-[0.96]',
-        variants[variant],
+        'rounded-full font-bold transition-all duration-100',
+        pressed ? pressedColors[variant] : baseColors[variant],
+        pressed ? 'scale-[0.96]' : 'scale-100',
         sizes[size],
         getWidthClass(),
-        disabled && 'opacity-50 cursor-not-allowed active:scale-100',
+        disabled && 'opacity-50 cursor-not-allowed',
         className
       )}
     >
