@@ -16,12 +16,12 @@ export default function KioskLayout({
   return (
     <div
       className={cn(
-        'min-h-screen bg-gray-50',
+        'h-screen overflow-hidden bg-gray-50',
         centered && 'flex items-center justify-center',
         className
       )}
     >
-      <div className="w-full max-w-[768px] px-8 py-12">
+      <div className="w-full max-w-[768px] h-full px-6 py-6 flex flex-col justify-center">
         {children}
       </div>
     </div>

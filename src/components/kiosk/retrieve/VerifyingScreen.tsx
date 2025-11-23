@@ -6,7 +6,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 export default function VerifyingScreen() {
   return (
     <KioskLayout>
-      <Card className="flex flex-col items-center gap-6 max-w-[500px] mx-auto">
+      <Card className="flex flex-col items-center gap-4 max-w-[400px] mx-auto">
         <LoadingSpinner />
         <h1 className="text-[24px] font-bold text-[#2c3e50] text-center">
           코드 확인 중

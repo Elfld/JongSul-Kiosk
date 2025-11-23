@@ -9,10 +9,10 @@ interface ErrorScreenProps {
 export default function ErrorScreen({ onRetry }: ErrorScreenProps) {
   return (
     <KioskLayout>
-      <Card className="flex flex-col items-center gap-6 max-w-[500px] mx-auto">
+      <Card className="flex flex-col items-center gap-4 max-w-[400px] mx-auto">
         <StatusIcon type="warning" />
 
-        <h1 className="text-[28px] font-bold text-[#2c3e50] text-center">
+        <h1 className="text-[24px] font-bold text-[#2c3e50] text-center">
           코드를 확인해주세요
         </h1>
 
@@ -22,7 +22,7 @@ export default function ErrorScreen({ onRetry }: ErrorScreenProps) {
           다시 입력해주세요
         </p>
 
-        <KioskButton variant="dark" size="medium" onClick={onRetry} className="w-full mt-2">
+        <KioskButton variant="dark" size="medium" onClick={onRetry} className="w-full mt-1">
           다시 시도
         </KioskButton>
       </Card>
