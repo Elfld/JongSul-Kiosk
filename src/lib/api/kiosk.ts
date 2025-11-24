@@ -47,13 +47,23 @@ export class KioskApiError extends Error {
 async function post<T>(endpoint: string, body: unknown): Promise<T> {
   const url = `${API_BASE_URL}${API_PREFIX}${endpoint}`;
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  });
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+  } catch (error) {
+    // 네트워크 에러 (CORS, 서버 다운 등)
+    throw new KioskApiError(
+      `네트워크 오류: 서버에 연결할 수 없습니다 (${url})`,
+      0,
+      'Network Error'
+    );
+  }
 
   if (!response.ok) {
     // 에러 응답 본문에서 detail 추출 시도
