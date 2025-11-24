@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Delete } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -18,19 +19,37 @@ export default function NumPad({
   submitDisabled = false,
   className,
 }: NumPadProps) {
+  const [pressedKey, setPressedKey] = useState<number | string | null>(null);
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+  const handlePointerDown = (key: number | string) => {
+    setPressedKey(key);
+  };
+
+  const handlePointerUp = (callback: () => void) => {
+    setPressedKey(null);
+    callback();
+  };
+
+  const handlePointerLeave = () => {
+    setPressedKey(null);
+  };
+
   return (
-    <div className={cn('w-full max-w-[520px] mx-auto', className)}>
-      <div className="rounded-[20px] overflow-hidden border-2 border-gray-200 bg-white">
+    <div className={cn('w-full max-w-[clamp(300px,55vmin,520px)] mx-auto', className)}>
+      <div className="rounded-[16px] overflow-hidden border-2 border-gray-200 bg-white">
         <div className="grid grid-cols-3">
           {/* 숫자 버튼 1-9 */}
           {numbers.map((num, index) => (
             <button
               key={num}
-              onClick={() => onNumberClick(num)}
+              onPointerDown={() => handlePointerDown(num)}
+              onPointerUp={() => handlePointerUp(() => onNumberClick(num))}
+              onPointerLeave={handlePointerLeave}
+              onPointerCancel={handlePointerLeave}
               className={cn(
-                'h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors',
+                'h-[clamp(44px,8vmin,70px)] text-[clamp(18px,3.5vmin,28px)] font-medium text-[#2c3e50] transition-colors duration-75',
+                pressedKey === num ? 'bg-gray-200' : 'bg-white',
                 // 오른쪽 테두리: 3의 배수가 아닌 경우에만
                 index % 3 !== 2 && 'border-r border-gray-200',
                 // 아래 테두리: 마지막 줄(7,8,9)이 아닌 경우에만
@@ -43,25 +62,47 @@ export default function NumPad({
 
           {/* 지우기 버튼 */}
           <button
-            onClick={onDelete}
-            className="h-[70px] bg-[#ffebee] hover:bg-[#ffcdd2] flex items-center justify-center transition-colors border-r border-t border-gray-200"
+            onPointerDown={() => handlePointerDown('delete')}
+            onPointerUp={() => handlePointerUp(onDelete)}
+            onPointerLeave={handlePointerLeave}
+            onPointerCancel={handlePointerLeave}
+            className={cn(
+              'h-[clamp(44px,8vmin,70px)] flex items-center justify-center transition-colors duration-75 border-r border-t border-gray-200',
+              pressedKey === 'delete' ? 'bg-[#ef9a9a]' : 'bg-[#ffebee]'
+            )}
           >
-            <Delete className="w-6 h-6 text-[#d32f2f]" />
+            <Delete className="w-[clamp(18px,3.5vmin,24px)] h-[clamp(18px,3.5vmin,24px)] text-[#d32f2f]" />
           </button>
 
           {/* 0 버튼 */}
           <button
-            onClick={() => onNumberClick(0)}
-            className="h-[70px] bg-white hover:bg-gray-50 text-[28px] font-medium text-[#2c3e50] transition-colors border-r border-t border-gray-200"
+            onPointerDown={() => handlePointerDown(0)}
+            onPointerUp={() => handlePointerUp(() => onNumberClick(0))}
+            onPointerLeave={handlePointerLeave}
+            onPointerCancel={handlePointerLeave}
+            className={cn(
+              'h-[clamp(44px,8vmin,70px)] text-[clamp(18px,3.5vmin,28px)] font-medium text-[#2c3e50] transition-colors duration-75 border-r border-t border-gray-200',
+              pressedKey === 0 ? 'bg-gray-200' : 'bg-white'
+            )}
           >
             0
           </button>
 
           {/* 확인 버튼 */}
           <button
-            onClick={onSubmit}
+            onPointerDown={() => !submitDisabled && handlePointerDown('submit')}
+            onPointerUp={() => !submitDisabled && handlePointerUp(onSubmit)}
+            onPointerLeave={handlePointerLeave}
+            onPointerCancel={handlePointerLeave}
             disabled={submitDisabled}
-            className="h-[70px] bg-[#e3f2fd] text-[18px] font-semibold text-[#1976d2] transition-colors border-t border-gray-200 disabled:bg-gray-100 disabled:text-gray-400 hover:enabled:bg-[#bbdefb]"
+            className={cn(
+              'h-[clamp(44px,8vmin,70px)] text-[clamp(14px,2.5vmin,18px)] font-semibold text-[#1976d2] transition-colors duration-75 border-t border-gray-200',
+              submitDisabled
+                ? 'bg-gray-100 text-gray-400'
+                : pressedKey === 'submit'
+                ? 'bg-[#90caf9]'
+                : 'bg-[#e3f2fd]'
+            )}
           >
             확인
           </button>

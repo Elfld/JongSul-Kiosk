@@ -12,12 +12,12 @@ interface InputScreenProps {
 export default function InputScreen({ pinCode, onPinChange, onSubmit, onBack }: InputScreenProps) {
   return (
     <KioskLayout>
-      <div className="flex flex-col gap-6 py-8">
-        <h1 className="text-[48px] font-bold text-[#2c3e50] text-center">
+      <div className="flex flex-col gap-[1.5vmin]">
+        <h1 className="text-[clamp(24px,4.5vmin,48px)] font-bold text-[#2c3e50] text-center">
           분실물 수령
         </h1>
 
-        <p className="text-[24px] text-[#6c757d] text-center leading-relaxed">
+        <p className="text-[clamp(14px,2.5vmin,24px)] text-[#6c757d] text-center leading-relaxed">
           홈페이지에서 발급받은
           <br />
           비밀번호 6자리를 입력해주세요
@@ -45,7 +45,7 @@ export default function InputScreen({ pinCode, onPinChange, onSubmit, onBack }: 
           variant="secondary"
           fullWidth
           onClick={onBack}
-          className="max-w-[320px] mt-12 mx-auto"
+          className="max-w-[clamp(220px,40vmin,320px)] mt-[2vmin] mx-auto"
         >
           처음 화면으로
         </KioskButton>
