@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { mockVerifyCode } from '@/lib/utils/kiosk';
+import { kioskApi } from '@/lib/api/kiosk';
 import type { RetrieveStep } from '@/lib/types/kiosk';
 import {
   InputScreen,
@@ -18,17 +18,26 @@ export default function RetrievePage() {
   const [pinCode, setPinCode] = useState('');
   const [lockerNumber, setLockerNumber] = useState<number | null>(null);
 
-  // verifying 단계에서 mockVerifyCode 실행 후 결과에 따라 전환
+  // verifying 단계에서 kioskApi.pickup 실행 후 결과에 따라 전환
   useEffect(() => {
     if (step === 'verifying') {
-      mockVerifyCode(pinCode).then((result) => {
-        if (result.success && result.lockerNumber) {
-          setLockerNumber(result.lockerNumber);
-          setStep('locker');
-        } else {
+      kioskApi
+        .pickup(pinCode)
+        .then((response) => {
+          // 성공: 사물함 번호 저장 후 locker 화면으로
+          const lockerId = response.item.locker_id;
+          if (lockerId) {
+            setLockerNumber(lockerId);
+            setStep('locker');
+          } else {
+            // locker_id가 없는 경우 (예외 상황)
+            setStep('error');
+          }
+        })
+        .catch(() => {
+          // 실패: 에러 화면으로
           setStep('error');
-        }
-      });
+        });
     }
   }, [step, pinCode]);
 
@@ -72,6 +81,7 @@ export default function RetrievePage() {
       return lockerNumber ? (
         <LockerScreen
           lockerNumber={lockerNumber}
+          pickupCode={pinCode}
           onComplete={handleLockerComplete}
         />
       ) : null;
