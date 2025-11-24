@@ -33,7 +33,8 @@ export class KioskApiError extends Error {
   constructor(
     message: string,
     public status: number,
-    public statusText: string
+    public statusText: string,
+    public detail?: string
   ) {
     super(message);
     this.name = 'KioskApiError';
@@ -55,10 +56,20 @@ async function post<T>(endpoint: string, body: unknown): Promise<T> {
   });
 
   if (!response.ok) {
+    // 에러 응답 본문에서 detail 추출 시도
+    let detail: string | undefined;
+    try {
+      const errorBody = await response.json();
+      detail = errorBody.detail;
+    } catch {
+      // JSON 파싱 실패 시 무시
+    }
+
     throw new KioskApiError(
-      `API Error: ${response.status} ${response.statusText}`,
+      detail || `API Error: ${response.status} ${response.statusText}`,
       response.status,
-      response.statusText
+      response.statusText,
+      detail
     );
   }
 
