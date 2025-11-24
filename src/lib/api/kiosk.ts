@@ -17,7 +17,7 @@ import type {
  * 외부 API 서버로 직접 요청합니다.
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8000';
 const API_PREFIX = '/main';
 
 /**
