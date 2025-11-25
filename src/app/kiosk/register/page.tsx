@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { kioskApi } from '@/lib/api/kiosk';
 import { mockAnalysis } from '@/lib/utils/kiosk';
 import type { RegisterStep, KioskItemData } from '@/lib/types/kiosk';
 import {
@@ -16,14 +17,26 @@ export default function RegisterPage() {
   const router = useRouter();
   const [step, setStep] = useState<RegisterStep>('wait');
   const [itemData, setItemData] = useState<KioskItemData | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // processing 단계에서 mockAnalysis 실행 후 confirm으로 이동
+  // processing 단계에서 registerRequest 실행 후 목업 데이터 생성하여 confirm으로
   useEffect(() => {
     if (step === 'processing') {
-      mockAnalysis().then((data) => {
-        setItemData(data);
-        setStep('confirm');
-      });
+      setErrorMessage(null);
+      kioskApi
+        .registerRequest()
+        .then(async () => {
+          // 촬영 요청 성공 → 목업 데이터 생성
+          const mockData = await mockAnalysis();
+          setItemData(mockData);
+          setStep('confirm');
+        })
+        .catch((err) => {
+          // 실패 시 에러 메시지 저장
+          setErrorMessage(err.message || '등록 요청 실패');
+          setItemData(null);
+          setStep('confirm');
+        });
     }
   }, [step]);
 
@@ -32,12 +45,14 @@ export default function RegisterPage() {
   const handleInsertComplete = () => setStep('processing');
   const handleConfirm = () => setStep('complete');
   const handleRetry = () => {
-    setStep('wait');
+    setErrorMessage(null);
     setItemData(null);
+    setStep('insert');
   };
   const handleNewRegistration = () => {
-    setStep('wait');
+    setErrorMessage(null);
     setItemData(null);
+    setStep('wait');
   };
   const handleBackToHome = () => router.push('/kiosk');
 
@@ -53,13 +68,20 @@ export default function RegisterPage() {
       return <ProcessingScreen />;
 
     case 'confirm':
+      // 성공 시 목업 데이터 표시, 실패 시 에러 표시
       return itemData ? (
         <ConfirmScreen
           itemData={itemData}
           onConfirm={handleConfirm}
           onRetry={handleRetry}
         />
-      ) : null;
+      ) : (
+        <ConfirmScreen
+          errorMessage={errorMessage}
+          onRetry={handleRetry}
+          onBack={handleBackToHome}
+        />
+      );
 
     case 'complete':
       return (
