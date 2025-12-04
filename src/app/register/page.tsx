@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { kioskApi } from '@/lib/api/kiosk';
-import type { RegisterStep } from '@/lib/types/kiosk';
+import { mockAnalysis } from '@/lib/utils/kiosk';
+import type { RegisterStep, KioskItemData } from '@/lib/types/kiosk';
 import {
   WaitScreen,
   InsertScreen,
@@ -15,22 +16,25 @@ import {
 export default function RegisterPage() {
   const router = useRouter();
   const [step, setStep] = useState<RegisterStep>('wait');
+  const [itemData, setItemData] = useState<KioskItemData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // processing 단계에서 registerRequest 실행 후 complete으로 이동
-  // (백엔드가 촬영 후 아이템 정보를 반환하지 않으므로 confirm 단계 스킵)
+  // processing 단계에서 registerRequest 실행 후 목업 데이터 생성하여 confirm으로
   useEffect(() => {
     if (step === 'processing') {
       setErrorMessage(null);
       kioskApi
         .registerRequest()
-        .then(() => {
-          // 촬영 요청 성공 → 완료 화면으로
-          setStep('complete');
+        .then(async () => {
+          // 촬영 요청 성공 → 목업 데이터 생성
+          const mockData = await mockAnalysis();
+          setItemData(mockData);
+          setStep('confirm');
         })
         .catch((err) => {
-          // 실패 시 에러 메시지 저장 후 confirm 화면에서 표시
+          // 실패 시 에러 메시지 저장
           setErrorMessage(err.message || '등록 요청 실패');
+          setItemData(null);
           setStep('confirm');
         });
     }
@@ -39,12 +43,15 @@ export default function RegisterPage() {
   // 핸들러 함수들
   const handleStart = () => setStep('insert');
   const handleInsertComplete = () => setStep('processing');
+  const handleConfirm = () => setStep('complete');
   const handleRetry = () => {
     setErrorMessage(null);
+    setItemData(null);
     setStep('insert');
   };
   const handleNewRegistration = () => {
     setErrorMessage(null);
+    setItemData(null);
     setStep('wait');
   };
   const handleBackToHome = () => router.push('/');
@@ -61,8 +68,14 @@ export default function RegisterPage() {
       return <ProcessingScreen />;
 
     case 'confirm':
-      // 에러 발생 시 재시도 화면으로 사용
-      return (
+      // 성공 시 목업 데이터 표시, 실패 시 에러 표시
+      return itemData ? (
+        <ConfirmScreen
+          itemData={itemData}
+          onConfirm={handleConfirm}
+          onRetry={handleRetry}
+        />
+      ) : (
         <ConfirmScreen
           errorMessage={errorMessage}
           onRetry={handleRetry}
