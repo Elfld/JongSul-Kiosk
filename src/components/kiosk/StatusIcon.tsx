@@ -43,12 +43,12 @@ export default function StatusIcon({ type, className }: StatusIconProps) {
   return (
     <div
       className={cn(
-        'w-24 h-24 rounded-full flex items-center justify-center',
+        'w-[clamp(64px,12vmin,96px)] h-[clamp(64px,12vmin,96px)] rounded-full flex items-center justify-center',
         config.bg,
         className
       )}
     >
-      <Icon className={cn('w-12 h-12 stroke-[2.5]', config.iconColor)} />
+      <Icon className={cn('w-[clamp(32px,6vmin,48px)] h-[clamp(32px,6vmin,48px)] stroke-[2.5]', config.iconColor)} />
     </div>
   );
 }

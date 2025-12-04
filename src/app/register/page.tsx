@@ -54,7 +54,7 @@ export default function RegisterPage() {
     setItemData(null);
     setStep('wait');
   };
-  const handleBackToHome = () => router.push('/kiosk');
+  const handleBackToHome = () => router.push('/');
 
   // step에 따라 화면 렌더링
   switch (step) {

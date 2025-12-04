@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface KioskButtonProps {
@@ -9,6 +10,7 @@ interface KioskButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   fullWidth?: boolean;
+  compact?: boolean;
   className?: string;
 }
 
@@ -19,32 +21,74 @@ export default function KioskButton({
   onClick,
   disabled = false,
   fullWidth = false,
+  compact = false,
   className,
 }: KioskButtonProps) {
-  const variants = {
-    primary: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
-    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d] hover:bg-gray-50',
-    below: 'bg-[#59969d] text-white hover:bg-[#4a7c82]',
-    warning: 'bg-[#ff9800] text-white hover:bg-[#f57c00]',
-    success: 'bg-[#4caf50] text-white hover:bg-[#45a049]',
-    dark: 'bg-[#475569] text-white hover:bg-[#334155]',
+  const [pressed, setPressed] = useState(false);
+
+  // 기본 상태 색상
+  const baseColors = {
+    primary: 'bg-[#4caf50] text-white',
+    secondary: 'bg-white border-2 border-gray-300 text-[#6c757d]',
+    below: 'bg-[#59969d] text-white',
+    warning: 'bg-[#ff9800] text-white',
+    success: 'bg-[#4caf50] text-white',
+    dark: 'bg-[#475569] text-white',
+  };
+
+  // 눌림 상태 색상
+  const pressedColors = {
+    primary: 'bg-[#3d8b40] text-white',
+    secondary: 'bg-gray-100 border-2 border-gray-300 text-[#6c757d]',
+    below: 'bg-[#3d6a6f] text-white',
+    warning: 'bg-[#e65100] text-white',
+    success: 'bg-[#3d8b40] text-white',
+    dark: 'bg-[#1e293b] text-white',
   };
 
   const sizes = {
-    large: 'py-6 text-[24px]',
-    medium: 'py-5 text-[24px]',
-    small: 'py-4 text-[20px]',
+    large: 'py-[clamp(16px,2.5vmin,24px)] text-[clamp(18px,3vmin,24px)]',
+    medium: 'py-[clamp(14px,2.2vmin,20px)] text-[clamp(18px,3vmin,24px)]',
+    small: 'py-[clamp(12px,2vmin,16px)] text-[clamp(16px,2.5vmin,20px)]',
+  };
+
+  const getWidthClass = () => {
+    if (compact) return 'w-[clamp(220px,40vmin,300px)]';
+    if (fullWidth) return 'w-full';
+    return 'w-auto px-[clamp(32px,6vmin,48px)]';
+  };
+
+  const handlePointerDown = () => {
+    if (disabled) return;
+    setPressed(true);
+  };
+
+  const handlePointerUp = () => {
+    if (disabled) return;
+    setPressed(false);
+    // 떼짐 효과가 보인 후 onClick 실행
+    setTimeout(() => {
+      onClick?.();
+    }, 80);
+  };
+
+  const handlePointerLeave = () => {
+    setPressed(false);
   };
 
   return (
     <button
-      onClick={onClick}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerLeave}
+      onPointerCancel={handlePointerLeave}
       disabled={disabled}
       className={cn(
-        'rounded-full font-bold transition-colors',
-        variants[variant],
+        'rounded-full font-bold transition-all duration-100',
+        pressed ? pressedColors[variant] : baseColors[variant],
+        pressed ? 'scale-[0.96]' : 'scale-100',
         sizes[size],
-        fullWidth ? 'w-full' : 'w-auto px-12',
+        getWidthClass(),
         disabled && 'opacity-50 cursor-not-allowed',
         className
       )}
