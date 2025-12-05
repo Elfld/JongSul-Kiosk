@@ -47,9 +47,9 @@ export default function KioskButton({
   };
 
   const sizes = {
-    large: 'py-[clamp(16px,2.5vmin,24px)] text-[clamp(18px,3vmin,24px)]',
-    medium: 'py-[clamp(14px,2.2vmin,20px)] text-[clamp(18px,3vmin,24px)]',
-    small: 'py-[clamp(12px,2vmin,16px)] text-[clamp(16px,2.5vmin,20px)]',
+    large: 'py-[clamp(24px,3.5vh,40px)] text-[clamp(28px,4vh,48px)]',
+    medium: 'py-[clamp(20px,3vh,32px)] text-[clamp(24px,3.5vh,40px)]',
+    small: 'py-[clamp(16px,2.5vh,28px)] text-[clamp(20px,3vh,36px)]',
   };
 
   const getWidthClass = () => {
