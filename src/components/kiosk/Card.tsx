@@ -11,7 +11,7 @@ export default function Card({ children, className }: CardProps) {
   return (
     <div
       className={cn(
-        'bg-white rounded-[max(16px,2vmin)] shadow-lg p-[max(24px,3vmin)]',
+        'bg-white rounded-[max(16px,2vmin)] shadow-lg p-[max(24px,4.5vmin)]',
         className
       )}
     >
