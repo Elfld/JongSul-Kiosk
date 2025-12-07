@@ -47,15 +47,15 @@ export default function KioskButton({
   };
 
   const sizes = {
-    large: 'py-[clamp(24px,3.5vh,40px)] text-[clamp(28px,4vh,48px)]',
-    medium: 'py-[clamp(20px,3vh,32px)] text-[clamp(24px,3.5vh,40px)]',
-    small: 'py-[clamp(16px,2.5vh,28px)] text-[clamp(20px,3vh,36px)]',
+    large: 'py-[clamp(16px,3.5vmin,36px)] text-[clamp(18px,4.2vmin,36px)]',
+    medium: 'py-[clamp(14px,3vmin,30px)] text-[clamp(18px,4.2vmin,36px)]',
+    small: 'py-[clamp(12px,2.8vmin,24px)] text-[clamp(16px,3.5vmin,30px)]',
   };
 
   const getWidthClass = () => {
-    if (compact) return 'w-[clamp(220px,40vmin,300px)]';
+    if (compact) return 'w-[clamp(220px,56vmin,420px)]';
     if (fullWidth) return 'w-full';
-    return 'w-auto px-[clamp(32px,6vmin,48px)]';
+    return 'w-auto px-[clamp(32px,8.4vmin,72px)]';
   };
 
   const handlePointerDown = () => {

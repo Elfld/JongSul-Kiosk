@@ -49,14 +49,14 @@ export default function LockerScreen({ lockerNumber, pickupCode, onComplete }: L
 
   return (
     <KioskLayout>
-      <Card className="flex flex-col items-center gap-[2.5vh] max-w-[clamp(500px,60vw,750px)] mx-auto">
+      <Card className="flex flex-col items-center gap-[2.8vmin] max-w-[clamp(320px,77vmin,700px)] mx-auto">
         <StatusIcon type="unlock" />
 
-        <h1 className="text-[clamp(36px,4.5vh,60px)] font-bold text-[#2c3e50] text-center">
+        <h1 className="text-[clamp(20px,4.9vmin,39px)] font-bold text-[#2c3e50] text-center">
           사물함 {lockerNumber}번이 열렸습니다
         </h1>
 
-        <p className="text-[clamp(24px,3vh,40px)] text-[#6c757d] text-center leading-relaxed">
+        <p className="text-[clamp(14px,3.5vmin,31px)] text-[#6c757d] text-center leading-relaxed">
           분실물을 수령하신 후
           <br />
           문을 닫아주세요
@@ -73,7 +73,7 @@ export default function LockerScreen({ lockerNumber, pickupCode, onComplete }: L
           compact
           onClick={handleClose}
           disabled={isClosing}
-          className="mt-[1.5vh]"
+          className="mt-[1.4vmin]"
         >
           {isClosing ? '닫는 중...' : '수령 완료'}
         </KioskButton>
