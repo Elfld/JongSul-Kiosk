@@ -14,7 +14,7 @@ export default function PinInput({
   className,
 }: PinInputProps) {
   return (
-    <div className={cn('flex justify-center gap-[1vmin] my-[1.5vmin]', className)}>
+    <div className={cn('flex justify-center gap-[2vmin] my-[3vmin]', className)}>
       {Array.from({ length }).map((_, index) => {
         const isActive = index === pinCode.length && pinCode.length < 6;
         const isFilled = index < pinCode.length;
@@ -24,7 +24,7 @@ export default function PinInput({
           <div
             key={index}
             className={cn(
-              'w-[clamp(40px,7vmin,60px)] h-[clamp(50px,9vmin,80px)] rounded-[clamp(8px,1.5vmin,18px)] flex items-center justify-center text-[clamp(20px,3.5vmin,32px)] font-semibold transition-all',
+              'w-[max(50px,10vmin)] h-[max(60px,13vmin)] rounded-[max(10px,2.5vmin)] flex items-center justify-center text-[max(28px,7vmin)] font-semibold transition-all',
               isActive
                 ? 'bg-white border-[3px] border-[#1976d2] text-[#1976d2]'
                 : isFilled

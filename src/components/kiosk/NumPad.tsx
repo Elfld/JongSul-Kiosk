@@ -36,8 +36,8 @@ export default function NumPad({
   };
 
   return (
-    <div className={cn('w-full max-w-[clamp(300px,55vmin,520px)] mx-auto', className)}>
-      <div className="rounded-[16px] overflow-hidden border-2 border-gray-200 bg-white">
+    <div className={cn('w-full max-w-[80vmin] mx-auto', className)}>
+      <div className="rounded-[max(16px,3vmin)] overflow-hidden border-2 border-gray-200 bg-white">
         <div className="grid grid-cols-3">
           {/* 숫자 버튼 1-9 */}
           {numbers.map((num, index) => (
@@ -48,7 +48,7 @@ export default function NumPad({
               onPointerLeave={handlePointerLeave}
               onPointerCancel={handlePointerLeave}
               className={cn(
-                'h-[clamp(44px,8vmin,70px)] text-[clamp(18px,3.5vmin,28px)] font-medium text-[#2c3e50] transition-colors duration-75',
+                'h-[max(56px,12vmin)] text-[max(24px,7vmin)] font-medium text-[#2c3e50] transition-colors duration-75',
                 pressedKey === num ? 'bg-gray-200' : 'bg-white',
                 // 오른쪽 테두리: 3의 배수가 아닌 경우에만
                 index % 3 !== 2 && 'border-r border-gray-200',
@@ -67,11 +67,11 @@ export default function NumPad({
             onPointerLeave={handlePointerLeave}
             onPointerCancel={handlePointerLeave}
             className={cn(
-              'h-[clamp(44px,8vmin,70px)] flex items-center justify-center transition-colors duration-75 border-r border-t border-gray-200',
+              'h-[max(56px,12vmin)] flex items-center justify-center transition-colors duration-75 border-r border-t border-gray-200',
               pressedKey === 'delete' ? 'bg-[#ef9a9a]' : 'bg-[#ffebee]'
             )}
           >
-            <Delete className="w-[clamp(18px,3.5vmin,24px)] h-[clamp(18px,3.5vmin,24px)] text-[#d32f2f]" />
+            <Delete className="w-[max(24px,6vmin)] h-[max(24px,6vmin)] text-[#d32f2f]" />
           </button>
 
           {/* 0 버튼 */}
@@ -81,7 +81,7 @@ export default function NumPad({
             onPointerLeave={handlePointerLeave}
             onPointerCancel={handlePointerLeave}
             className={cn(
-              'h-[clamp(44px,8vmin,70px)] text-[clamp(18px,3.5vmin,28px)] font-medium text-[#2c3e50] transition-colors duration-75 border-r border-t border-gray-200',
+              'h-[max(56px,12vmin)] text-[max(24px,7vmin)] font-medium text-[#2c3e50] transition-colors duration-75 border-r border-t border-gray-200',
               pressedKey === 0 ? 'bg-gray-200' : 'bg-white'
             )}
           >
@@ -96,7 +96,7 @@ export default function NumPad({
             onPointerCancel={handlePointerLeave}
             disabled={submitDisabled}
             className={cn(
-              'h-[clamp(44px,8vmin,70px)] text-[clamp(14px,2.5vmin,18px)] font-semibold text-[#1976d2] transition-colors duration-75 border-t border-gray-200',
+              'h-[max(56px,12vmin)] text-[max(18px,5vmin)] font-semibold text-[#1976d2] transition-colors duration-75 border-t border-gray-200',
               submitDisabled
                 ? 'bg-gray-100 text-gray-400'
                 : pressedKey === 'submit'
