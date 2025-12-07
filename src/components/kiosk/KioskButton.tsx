@@ -47,15 +47,15 @@ export default function KioskButton({
   };
 
   const sizes = {
-    large: 'py-[clamp(16px,4vmin,32px)] text-[clamp(20px,5vmin,44px)]',
-    medium: 'py-[clamp(14px,3.5vmin,28px)] text-[clamp(18px,4.5vmin,36px)]',
-    small: 'py-[clamp(12px,3vmin,24px)] text-[clamp(16px,4vmin,32px)]',
+    large: 'py-[max(16px,1.5vmin)] text-[max(18px,1.5vmin)]',
+    medium: 'py-[max(14px,1.3vmin)] text-[max(16px,1.3vmin)]',
+    small: 'py-[max(12px,1vmin)] text-[max(14px,1vmin)]',
   };
 
   const getWidthClass = () => {
-    if (compact) return 'w-[clamp(220px,55vmin,420px)]';
+    if (compact) return 'w-[max(220px,27vmin)]';
     if (fullWidth) return 'w-full';
-    return 'w-auto px-[clamp(32px,8vmin,64px)]';
+    return 'w-auto px-[max(32px,4vmin)]';
   };
 
   const handlePointerDown = () => {
@@ -84,7 +84,7 @@ export default function KioskButton({
       onPointerCancel={handlePointerLeave}
       disabled={disabled}
       className={cn(
-        'rounded-full font-bold transition-all duration-100',
+        'rounded-full font-bold transition-all duration-100 whitespace-nowrap',
         pressed ? pressedColors[variant] : baseColors[variant],
         pressed ? 'scale-[0.96]' : 'scale-100',
         sizes[size],
