@@ -21,7 +21,7 @@ export default function KioskLayout({
         className
       )}
     >
-      <div className="w-full h-full px-[3vmin] py-[2.5vmin] flex flex-col justify-center">
+      <div className="w-full max-w-[min(600px,70vmin)] px-6 py-8 flex flex-col justify-center mx-auto">
         {children}
       </div>
     </div>

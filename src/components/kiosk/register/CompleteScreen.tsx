@@ -10,22 +10,22 @@ interface CompleteScreenProps {
 export default function CompleteScreen({ onNewRegistration, onTimeout }: CompleteScreenProps) {
   return (
     <KioskLayout>
-      <div className="flex flex-col items-center gap-[6vmin]">
+      <div className="flex flex-col items-center gap-[clamp(20px,3.5vmin,36px)]">
         <StatusIcon type="success" />
 
-        <h1 className="text-[max(36px,14vmin)] font-bold text-[#2c3e50]">
+        <h1 className="text-[clamp(28px,6vmin,56px)] font-bold text-[#2c3e50] whitespace-nowrap">
           등록 완료
         </h1>
 
-        <p className="text-[max(20px,7vmin)] text-[#6c757d] text-center leading-relaxed">
-          분실물이 성공적으로 등록되었어요 안심하고 돌아가세요
+        <p className="text-[clamp(16px,3.5vmin,32px)] text-[#6c757d] text-center">
+          분실물이 성공적으로 등록되었어요<br />안심하고 돌아가세요
         </p>
 
-        <KioskButton variant="primary" size="medium" onClick={onNewRegistration} className="w-[max(280px,65vmin)]">
+        <KioskButton variant="primary" size="medium" onClick={onNewRegistration} fullWidth>
           새로운 등록
         </KioskButton>
 
-        <ProgressTimer duration={5} onComplete={onTimeout} className="w-[max(300px,70vmin)]" />
+        <ProgressTimer duration={5} onComplete={onTimeout} className="w-full" />
       </div>
     </KioskLayout>
   );
