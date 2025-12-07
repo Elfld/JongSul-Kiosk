@@ -9,14 +9,14 @@ interface CompleteScreenProps {
 export default function CompleteScreen({ onTimeout }: CompleteScreenProps) {
   return (
     <KioskLayout>
-      <Card className="flex flex-col items-center gap-[2vmin] max-w-[clamp(320px,55vmin,500px)] mx-auto">
+      <Card className="flex flex-col items-center gap-[2vmin] max-w-[clamp(320px,55vmin,650px)] mx-auto">
         <StatusIcon type="party" />
 
         <div className="text-center">
-          <h1 className="text-[clamp(20px,3.5vmin,28px)] font-bold text-[#2c3e50] mb-[0.5vmin]">
+          <h1 className="text-[clamp(20px,3.5vmin,38px)] font-bold text-[#2c3e50] mb-[0.5vmin]">
             이용해 주셔서 감사합니다
           </h1>
-          <p className="text-[clamp(14px,2.5vmin,24px)] text-[#6c757d]">
+          <p className="text-[clamp(14px,2.5vmin,34px)] text-[#6c757d]">
             잠시 후 처음 화면으로
             <br />
             돌아갑니다
