@@ -24,7 +24,7 @@ export default function PinInput({
           <div
             key={index}
             className={cn(
-              'w-[clamp(40px,7vmin,110px)] h-[clamp(50px,9vmin,145px)] rounded-[clamp(8px,1.5vmin,32px)] flex items-center justify-center text-[clamp(20px,3.5vmin,60px)] font-semibold transition-all',
+              'w-[clamp(40px,7vmin,145px)] h-[clamp(50px,9vmin,192px)] rounded-[clamp(8px,1.5vmin,42px)] flex items-center justify-center text-[clamp(20px,3.5vmin,80px)] font-semibold transition-all',
               isActive
                 ? 'bg-white border-[3px] border-[#1976d2] text-[#1976d2]'
                 : isFilled
