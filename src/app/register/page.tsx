@@ -2,53 +2,55 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { kioskApi } from '@/lib/api/kiosk';
-import { mockAnalysis } from '@/lib/utils/kiosk';
-import type { RegisterStep, KioskItemData } from '@/lib/types/kiosk';
+import { kioskApi, LOCATION } from '@/lib/api/kiosk';
+import type { RegisterStep, RegisteredItemData } from '@/lib/types/kiosk';
 import {
   WaitScreen,
-  InsertScreen,
   ProcessingScreen,
-  ConfirmScreen,
   CompleteScreen,
 } from '@/components/kiosk/register';
 
 export default function RegisterPage() {
   const router = useRouter();
   const [step, setStep] = useState<RegisterStep>('wait');
-  const [itemData, setItemData] = useState<KioskItemData | null>(null);
+  const [itemData, setItemData] = useState<RegisteredItemData | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // processing 단계에서 registerRequest 실행 후 목업 데이터 생성하여 confirm으로
+  // processing 단계에서 registerRequest 실행 후 complete로 이동
   useEffect(() => {
     if (step === 'processing') {
       setErrorMessage(null);
+      setItemData(null);
+
       kioskApi
         .registerRequest()
-        .then(async () => {
-          // 촬영 요청 성공 → 목업 데이터 생성
-          const mockData = await mockAnalysis();
-          setItemData(mockData);
-          setStep('confirm');
+        .then((response) => {
+          if (response.status === 'success' && response.image_url && response.category) {
+            // 등록 성공 → 완료 화면으로
+            const data: RegisteredItemData = {
+              photoUrl: response.image_url,
+              category: response.category,
+              registeredAt: new Date().toISOString(),
+              location: LOCATION,
+            };
+            setItemData(data);
+            setStep('complete');
+          } else {
+            // API는 성공했지만 데이터 누락 또는 에러 상태
+            throw new Error(response.message || '등록에 실패했습니다');
+          }
         })
         .catch((err) => {
-          // 실패 시 에러 메시지 저장
+          // 실패 시 에러 메시지 저장하고 wait로 복귀
           setErrorMessage(err.message || '등록 요청 실패');
           setItemData(null);
-          setStep('confirm');
+          setStep('wait');
         });
     }
   }, [step]);
 
   // 핸들러 함수들
-  const handleStart = () => setStep('insert');
-  const handleInsertComplete = () => setStep('processing');
-  const handleConfirm = () => setStep('complete');
-  const handleRetry = () => {
-    setErrorMessage(null);
-    setItemData(null);
-    setStep('insert');
-  };
+  const handleRegister = () => setStep('processing');
   const handleNewRegistration = () => {
     setErrorMessage(null);
     setItemData(null);
@@ -59,33 +61,21 @@ export default function RegisterPage() {
   // step에 따라 화면 렌더링
   switch (step) {
     case 'wait':
-      return <WaitScreen onStart={handleStart} onBack={handleBackToHome} />;
-
-    case 'insert':
-      return <InsertScreen onComplete={handleInsertComplete} onBack={handleBackToHome} />;
+      return (
+        <WaitScreen
+          onRegister={handleRegister}
+          onBack={handleBackToHome}
+          errorMessage={errorMessage}
+        />
+      );
 
     case 'processing':
       return <ProcessingScreen />;
 
-    case 'confirm':
-      // 성공 시 목업 데이터 표시, 실패 시 에러 표시
-      return itemData ? (
-        <ConfirmScreen
-          itemData={itemData}
-          onConfirm={handleConfirm}
-          onRetry={handleRetry}
-        />
-      ) : (
-        <ConfirmScreen
-          errorMessage={errorMessage}
-          onRetry={handleRetry}
-          onBack={handleBackToHome}
-        />
-      );
-
     case 'complete':
       return (
         <CompleteScreen
+          itemData={itemData}
           onNewRegistration={handleNewRegistration}
           onTimeout={handleBackToHome}
         />

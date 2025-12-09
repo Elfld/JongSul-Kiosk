@@ -30,28 +30,28 @@ export default function InsertScreen({ onComplete, onBack }: InsertScreenProps) 
   return (
     <KioskLayout>
       <div className="flex flex-col items-center gap-[2.5vmin]">
-        <h1 className="text-[clamp(28px,5.5vmin,60px)] font-bold text-[#2c3e50] text-center">
+        <h1 className="text-[clamp(28px,5.5vmin,155px)] font-bold text-[#2c3e50] text-center">
           {isOpening ? '투입구를 여는 중...' : '투입구가 열렸습니다'}
         </h1>
-        <p className="text-[clamp(16px,3vmin,30px)] text-[#6c757d] text-center leading-relaxed">
+        <p className="text-[clamp(16px,3vmin,75px)] text-[#6c757d] text-center leading-relaxed">
           분실물을 넣고
           <br />
           투입 완료 버튼을 눌러주세요
         </p>
-        <div className={`w-[clamp(240px,45vmin,400px)] h-[clamp(140px,25vmin,250px)] border-4 ${error ? 'border-red-400' : 'border-[#4caf50]'} rounded-[20px] bg-white flex items-center justify-center`}>
-          <PackageOpen className={`w-[clamp(40px,8vmin,80px)] h-[clamp(40px,8vmin,80px)] ${error ? 'text-red-400' : 'text-[#4caf50]'}`} strokeWidth={2} />
+        <div className={`w-[clamp(240px,45vmin,900px)] h-[clamp(140px,25vmin,550px)] border-4 ${error ? 'border-red-400' : 'border-[#4caf50]'} rounded-[20px] bg-white flex items-center justify-center`}>
+          <PackageOpen className={`w-[clamp(40px,8vmin,192px)] h-[clamp(40px,8vmin,192px)] ${error ? 'text-red-400' : 'text-[#4caf50]'}`} strokeWidth={2} />
         </div>
         {error && (
-          <div className="w-full max-w-[clamp(240px,45vmin,400px)] p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-[clamp(11px,1.8vmin,14px)] text-red-600 text-center font-mono break-all">
+          <div className="w-full max-w-[clamp(240px,45vmin,900px)] p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-[clamp(11px,1.8vmin,32px)] text-red-600 text-center font-mono break-all">
               {error}
             </p>
           </div>
         )}
-        <KioskButton variant="primary" onClick={onComplete} disabled={isOpening} className="w-[clamp(180px,30vmin,250px)]">
+        <KioskButton variant="primary" onClick={onComplete} disabled={isOpening} className="w-[clamp(180px,30vmin,590px)]">
           {isOpening ? '잠시만...' : '투입 완료'}
         </KioskButton>
-        <KioskButton variant="secondary" onClick={onBack} className="w-[clamp(180px,30vmin,250px)]">
+        <KioskButton variant="secondary" onClick={onBack} className="w-[clamp(180px,30vmin,590px)]">
           처음 화면으로
         </KioskButton>
       </div>
