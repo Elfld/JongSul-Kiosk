@@ -4,9 +4,7 @@
 
 export type RegisterStep =
   | 'wait'
-  | 'insert'
   | 'processing'
-  | 'confirm'
   | 'complete';
 
 export type RetrieveStep =
@@ -53,7 +51,7 @@ export interface LockerCloseRequest {
 /** POST /kiosk/register/request */
 export interface ItemRegisterRequest {
   device_name: string;
-  location?: string | null;
+  location: string;
 }
 
 /** POST /kiosk/locker/open */
@@ -88,6 +86,14 @@ export interface LockerOpenResponse {
   aws_request_id?: string | null;
 }
 
+/** POST /kiosk/register/request 응답 */
+export interface ItemRegisterResponse {
+  status: 'success' | 'error';
+  message: string;
+  category: string | null;
+  image_url: string | null;
+}
+
 // ============================================================
 // 에러 타입
 // ============================================================
@@ -117,4 +123,12 @@ export interface KioskItemData {
 export interface PickupCodeData {
   code: string;
   lockerNumber: number;
+}
+
+/** 등록 완료 화면용 데이터 */
+export interface RegisteredItemData {
+  photoUrl: string;
+  category: string;
+  registeredAt: string;
+  location: string;
 }

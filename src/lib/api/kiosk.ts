@@ -6,6 +6,7 @@ import type {
   LockerCloseRequest,
   LockerCloseResponse,
   ItemRegisterRequest,
+  ItemRegisterResponse,
   LockerOpenRequest,
   LockerOpenResponse,
 } from '@/lib/types/kiosk';
@@ -25,6 +26,12 @@ const API_PREFIX = '';
  * 환경 변수에서 가져오거나 기본값 사용
  */
 export const DEVICE_NAME = process.env.NEXT_PUBLIC_DEVICE_NAME || 'kiosk-1';
+
+/**
+ * 분실물 수거 위치
+ * 환경 변수에서 가져오거나 기본값 사용
+ */
+export const LOCATION = process.env.NEXT_PUBLIC_LOCATION || '60주년 기념관';
 
 /**
  * API 에러 클래스
@@ -129,18 +136,18 @@ export const kioskApi = {
    * POST /kiosk/register/request
    *
    * @param deviceName 장비 이름
-   * @param location 수거 위치 (선택)
-   * @returns 빈 응답
+   * @param location 수거 위치
+   * @returns 등록 결과 (사진 URL, 카테고리 등)
    */
   async registerRequest(
     deviceName: string = DEVICE_NAME,
-    location?: string
-  ): Promise<void> {
+    location: string = LOCATION
+  ): Promise<ItemRegisterResponse> {
     const body: ItemRegisterRequest = {
       device_name: deviceName,
-      location: location ?? null,
+      location: location,
     };
-    await post<Record<string, never>>('/kiosk/register/request', body);
+    return post<ItemRegisterResponse>('/kiosk/register/request', body);
   },
 
   /**
