@@ -48,7 +48,7 @@ export default function NumPad({
               onPointerLeave={handlePointerLeave}
               onPointerCancel={handlePointerLeave}
               className={cn(
-                'h-[clamp(44px,8vmin,158px)] text-[clamp(18px,3.5vmin,68px)] font-medium text-[#2c3e50] transition-colors duration-75 select-none touch-manipulation',
+                'h-[clamp(44px,8vmin,158px)] text-[clamp(18px,3.5vmin,68px)] font-medium text-[#2c3e50] select-none touch-manipulation',
                 pressedKey === num ? 'bg-gray-200' : 'bg-white',
                 // 오른쪽 테두리: 3의 배수가 아닌 경우에만
                 index % 3 !== 2 && 'border-r border-gray-200',
@@ -67,7 +67,7 @@ export default function NumPad({
             onPointerLeave={handlePointerLeave}
             onPointerCancel={handlePointerLeave}
             className={cn(
-              'h-[clamp(44px,8vmin,158px)] flex items-center justify-center transition-colors duration-75 border-r border-t border-gray-200 select-none touch-manipulation',
+              'h-[clamp(44px,8vmin,158px)] flex items-center justify-center border-r border-t border-gray-200 select-none touch-manipulation',
               pressedKey === 'delete' ? 'bg-[#ef9a9a]' : 'bg-[#ffebee]'
             )}
           >
@@ -81,7 +81,7 @@ export default function NumPad({
             onPointerLeave={handlePointerLeave}
             onPointerCancel={handlePointerLeave}
             className={cn(
-              'h-[clamp(44px,8vmin,158px)] text-[clamp(18px,3.5vmin,68px)] font-medium text-[#2c3e50] transition-colors duration-75 border-r border-t border-gray-200 select-none touch-manipulation',
+              'h-[clamp(44px,8vmin,158px)] text-[clamp(18px,3.5vmin,68px)] font-medium text-[#2c3e50] border-r border-t border-gray-200 select-none touch-manipulation',
               pressedKey === 0 ? 'bg-gray-200' : 'bg-white'
             )}
           >
@@ -96,7 +96,7 @@ export default function NumPad({
             onPointerCancel={handlePointerLeave}
             disabled={submitDisabled}
             className={cn(
-              'h-[clamp(44px,8vmin,158px)] text-[clamp(14px,2.5vmin,42px)] font-semibold text-[#1976d2] transition-colors duration-75 border-t border-gray-200 select-none touch-manipulation',
+              'h-[clamp(44px,8vmin,158px)] text-[clamp(14px,2.5vmin,42px)] font-semibold text-[#1976d2] border-t border-gray-200 select-none touch-manipulation',
               submitDisabled
                 ? 'bg-gray-100 text-gray-400'
                 : pressedKey === 'submit'
