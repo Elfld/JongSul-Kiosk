@@ -27,7 +27,7 @@ export default function WaitScreen({ onRegister, onBack, errorMessage }: WaitScr
 
         {errorMessage && (
           <div className="w-full max-w-[clamp(240px,45vmin,900px)] p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-[clamp(11px,1.8vmin,32px)] text-red-600 text-center font-mono break-all">
+            <p className="text-[clamp(14px,2.5vmin,52px)] text-red-600 text-center leading-relaxed">
               {errorMessage}
             </p>
           </div>

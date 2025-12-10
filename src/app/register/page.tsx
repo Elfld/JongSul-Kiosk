@@ -36,7 +36,7 @@ export default function RegisterPage() {
           // 상태 검증
           if (response.status !== 'success') {
             console.error('[등록 실패] status:', response.status, 'message:', response.message);
-            throw new Error(`서버 오류: ${response.message || '알 수 없는 오류'}`);
+            throw new Error(response.message || '등록에 실패했습니다');
           }
 
           // 이미지 URL 검증
