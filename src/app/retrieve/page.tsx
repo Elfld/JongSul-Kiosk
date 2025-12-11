@@ -33,16 +33,21 @@ export default function RetrievePage() {
             setStep('locker');
           } else {
             // locker_id가 없는 경우 (예외 상황)
-            setErrorMessage('사물함이 배정되지 않은 아이템입니다 (locker_id: null)');
+            console.error('[수령 실패] locker_id가 없음');
+            setErrorMessage('사물함 정보를 찾을 수 없습니다');
             setStep('error');
           }
         })
         .catch(async (error) => {
           // 실패: 에러 메시지 저장 후 에러 화면으로
-          let message = error.message || '알 수 없는 오류';
-          if (error.status) {
-            message = `[${error.status}] ${message}`;
-          }
+          console.error('[수령 에러]', {
+            name: error.name,
+            message: error.message,
+            status: error.status,
+            detail: error.detail,
+          });
+
+          const message = error.message || '코드를 확인할 수 없습니다';
           setErrorMessage(message);
           setStep('error');
         });
