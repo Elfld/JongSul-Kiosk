@@ -47,7 +47,7 @@ export default function RetrievePage() {
             detail: error.detail,
           });
 
-          let message = error.message || '코드를 확인할 수 없습니다';
+          const message = error.message || '코드를 확인할 수 없습니다';
           setErrorMessage(message);
           setStep('error');
         });
