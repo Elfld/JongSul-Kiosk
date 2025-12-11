@@ -63,7 +63,7 @@ async function post<T>(endpoint: string, body: unknown): Promise<T> {
       },
       body: JSON.stringify(body),
     });
-  } catch (error) {
+  } catch {
     // 네트워크 에러 (CORS, 서버 다운 등)
     throw new KioskApiError(
       `네트워크 오류: 서버에 연결할 수 없습니다 (${url})`,

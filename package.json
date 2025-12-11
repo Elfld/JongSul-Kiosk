@@ -1,6 +1,7 @@
 {
-  "name": "losted-board",
-  "version": "0.1.0",
+  "name": "jongsul-kiosk",
+  "version": "1.0.0",
+  "description": "인하대 분실물 키오스크 시스템 - 24시간 무인 분실물 등록/수령",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -8,6 +9,11 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elfld/JongSul-Kiosk.git"
+  },
+  "author": "종설팀",
   "dependencies": {
     "lucide-react": "^0.544.0",
     "next": "15.5.7",
