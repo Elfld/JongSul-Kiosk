@@ -25,14 +25,6 @@ export default function RegisterPage() {
       kioskApi
         .registerRequest()
         .then((response) => {
-          // 응답 전체 로깅 (디버깅용)
-          console.log('[등록 API 응답]', {
-            status: response.status,
-            message: response.message,
-            category: response.category,
-            image_url: response.image_url,
-          });
-
           // 상태 검증
           if (response.status !== 'success') {
             console.error('[등록 실패] status:', response.status, 'message:', response.message);
@@ -52,7 +44,6 @@ export default function RegisterPage() {
           }
 
           // 등록 성공 → 완료 화면으로
-          console.log('[등록 성공]');
           const data: RegisteredItemData = {
             photoUrl: response.image_url,
             category: response.category,
@@ -90,19 +81,16 @@ export default function RegisterPage() {
 
   // 핸들러 함수들
   const handleRegister = () => {
-    console.log('[등록 시작]');
     setStep('processing');
   };
 
   const handleNewRegistration = () => {
-    console.log('[새로운 등록]');
     setErrorMessage(null);
     setItemData(null);
     setStep('wait');
   };
 
   const handleBackToHome = () => {
-    console.log('[홈으로]');
     router.push('/');
   };
 
