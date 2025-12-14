@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* 키오스크 전용: 모든 스크롤 방지 */
+html,
+body {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
+}
+
+/* iOS Safari 스크롤 방지 */
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
