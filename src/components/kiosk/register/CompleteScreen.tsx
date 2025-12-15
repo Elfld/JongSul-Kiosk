@@ -72,7 +72,7 @@ export default function CompleteScreen({ itemData, onNewRegistration, onTimeout 
           새로운 등록
         </KioskButton>
 
-        <ProgressTimer duration={5} onComplete={onTimeout} className="w-[clamp(220px,40vmin,750px)]" />
+        <ProgressTimer duration={15} onComplete={onTimeout} className="w-[clamp(220px,40vmin,750px)]" />
       </div>
     </KioskLayout>
   );
